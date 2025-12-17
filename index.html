@@ -1,201 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Birthday Darshan 🎉</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Darshan 🎉</title>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #89f7fe, #66a6ff);
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-    }
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: black;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  color: white;
+}
 
-    .card {
-      background: white;
-      padding: 30px 40px;
-      border-radius: 20px;
-      text-align: center;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-      animation: pop 1s ease-in-out;
-      max-width: 360px;
-      z-index: 2;
-    }
+.card {
+  background: #111;
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 0 40px rgba(255,255,255,0.2);
+  max-width: 360px;
+  z-index: 2;
+}
 
-    h1 {
-      color: #2563eb;
-      font-size: 2.2rem;
-      margin-bottom: 10px;
-    }
+h1 { color: #60a5fa; }
 
-    p {
-      color: #444;
-      font-size: 1.1rem;
-    }
+button {
+  margin-top: 15px;
+  padding: 12px 22px;
+  border-radius: 30px;
+  border: none;
+  background: #2563eb;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+}
 
-    button {
-      margin-top: 20px;
-      padding: 12px 22px;
-      font-size: 1rem;
-      border: none;
-      border-radius: 30px;
-      background: #2563eb;
-      color: white;
-      cursor: pointer;
-      transition: transform 0.2s, background 0.2s;
-    }
+button:hover { background: #1d4ed8; }
 
-    button:hover {
-      background: #1d4ed8;
-      transform: scale(1.05);
-    }
+.hidden { display: none; }
 
-    .hidden {
-      display: none;
-    }
+.firework {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  animation: explode 1.2s ease-out forwards;
+}
 
-    @keyframes pop {
-      0% { transform: scale(0.5); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
-    }
+@keyframes explode {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(6); opacity: 0; }
+}
 
-    .balloons span {
-      position: absolute;
-      bottom: -50px;
-      font-size: 28px;
-      animation: floatUp 6s linear infinite;
-      opacity: 0.9;
-    }
+.balloons span {
+  position: absolute;
+  bottom: -50px;
+  font-size: 30px;
+  animation: floatUp 6s linear infinite;
+}
 
-    @keyframes floatUp {
-      0% { transform: translateY(0); opacity: 0; }
-      20% { opacity: 1; }
-      100% { transform: translateY(-120vh); opacity: 0; }
-    }
+@keyframes floatUp {
+  0% { transform: translateY(0); opacity: 0; }
+  20% { opacity: 1; }
+  100% { transform: translateY(-120vh); opacity: 0; }
+}
 
-    .firework {
-      position: absolute;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      animation: explode 1s ease-out forwards;
-    }
+/* 🎂 Cake */
+#cake {
+  font-size: 80px;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: transform 0.5s;
+}
 
-    @keyframes explode {
-      0% { transform: scale(1); opacity: 1; }
-      100% { transform: scale(4); opacity: 0; }
-    }
-  </style>
+#cake.cut {
+  transform: rotate(-20deg) scale(1.1);
+}
+</style>
 </head>
 
 <body>
 
-  <audio id="bgMusic" loop>
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-  </audio>
+<!-- 🎵 Birthday Song -->
+<audio id="bgMusic">
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3">
+</audio>
 
-  <div class="card">
-    <div id="countdown" style="font-size:1.1rem;color:#2563eb;margin-bottom:10px;font-weight:600;">
-      Loading countdown...
-    </div>
+<div class="card">
+  <div id="ageText"></div>
 
-    <h1>Happy Birthday Darshan 🎂</h1>
-    <p>28 March 2006 🎉</p>
+  <h1>Happy Birthday Darshan 🎂</h1>
+  <p>28 March 2006 🎉</p>
 
-    <button onclick="showMessage()">Click for Surprise 🎁</button>
-    <button style="margin-left:10px;background:#16a34a" onclick="startGame()">Play Game 🎮</button>
+  <button onclick="showSurprise()">Click for Surprise 🎁</button>
+  <button style="background:#16a34a" onclick="startGame()">Play Game 🎮</button>
 
-    <p id="message" class="hidden">
-      Dear Darshan 💙<br/><br/>
-      Wishing you a day filled with happiness, laughter, and unforgettable moments 🌟<br/>
-      May all your dreams come true and may this year bring you success and joy 🎯✨<br/><br/>
-      — From your brother,<br/>
-      <strong>Yash ❤️</strong>
-    </p>
+  <div id="cake" class="hidden" onclick="cutCake()">🎂</div>
 
-    <div id="game" class="hidden" style="margin-top:15px;font-size:1rem;">
-      <p><strong>🎯 Birthday Guess Game</strong></p>
-      <p>Guess Darshan's birth month:</p>
-      <input id="guess" placeholder="Type month (e.g. March)"
-        style="padding:6px;border-radius:8px;border:1px solid #ccc" />
-      <button onclick="checkGuess()" style="margin-left:6px">Submit</button>
-      <p id="gameResult"></p>
-    </div>
+  <p id="message" class="hidden">
+    Dear Darshan 💙<br><br>
+    May your life be as bright as these fireworks 🎆<br>
+    Keep smiling and achieving your dreams 🌟<br><br>
+    — From your brother,<br><b>Yash ❤️</b>
+  </p>
+
+  <div id="game" class="hidden">
+    <p>🎯 Guess birth month:</p>
+    <input id="guess" placeholder="March">
+    <button onclick="checkGuess()">Submit</button>
+    <p id="gameResult"></p>
   </div>
+</div>
 
-  <div class="balloons" id="balloons"></div>
+<script>
+function showSurprise() {
+  document.getElementById("message").classList.remove("hidden");
+  document.getElementById("cake").classList.remove("hidden");
+  document.getElementById("bgMusic").play();
+  balloons();
+  bigFireworks();
+}
 
-  <script>
-    function showMessage() {
-      document.getElementById('message').classList.remove('hidden');
-      document.getElementById('bgMusic').play();
-      createBalloons();
-      bigFireworks();
-    }
+function cutCake() {
+  document.getElementById("cake").classList.add("cut");
+  alert("🎉 Cake Cut Successfully! Happy Birthday Darshan 🎂");
+  bigFireworks();
+}
 
-    function startGame() {
-      document.getElementById('game').classList.remove('hidden');
-    }
+function startGame() {
+  document.getElementById("game").classList.remove("hidden");
+}
 
-    function checkGuess() {
-      const val = document.getElementById('guess').value.toLowerCase();
-      const res = document.getElementById('gameResult');
-      if (val.includes('march')) {
-        res.innerHTML = '🎉 Correct! Happy Birthday Darshan! 🎂';
-        bigFireworks();
-      } else {
-        res.innerHTML = '❌ Nope! Try again 😄';
-      }
-    }
+function checkGuess() {
+  const val = document.getElementById("guess").value.toLowerCase();
+  document.getElementById("gameResult").innerHTML =
+    val.includes("march") ? "🎉 Correct!" : "❌ Try again!";
+  if (val.includes("march")) bigFireworks();
+}
 
-    function createBalloons() {
-      const container = document.getElementById('balloons');
-      const emojis = ['🎈','🎉','🎂','⭐','🎁'];
-      for (let i = 0; i < 25; i++) {
-        const balloon = document.createElement('span');
-        balloon.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
-        balloon.style.left = Math.random() * 100 + 'vw';
-        balloon.style.animationDuration = (Math.random() * 3 + 4) + 's';
-        container.appendChild(balloon);
-        setTimeout(() => balloon.remove(), 6000);
-      }
-    }
+function balloons() {
+  const emojis = ['🎈','🎉','🎂','⭐','🎁'];
+  for (let i = 0; i < 30; i++) {
+    const b = document.createElement("span");
+    b.innerHTML = emojis[Math.floor(Math.random()*emojis.length)];
+    b.style.left = Math.random()*100 + "vw";
+    b.style.animationDuration = (Math.random()*3+4) + "s";
+    document.body.appendChild(b);
+    setTimeout(()=>b.remove(),6000);
+  }
+}
 
-    function createFirework() {
-      for (let i = 0; i < 12; i++) {
-        const fw = document.createElement('div');
-        fw.className = 'firework';
-        fw.style.left = window.innerWidth / 2 + 'px';
-        fw.style.top = window.innerHeight / 2 + 'px';
-        fw.style.background = `hsl(${Math.random() * 360},100%,60%)`;
-        fw.style.transform = `translate(${Math.random()*300-150}px, ${Math.random()*300-150}px)`;
-        document.body.appendChild(fw);
-        setTimeout(() => fw.remove(), 1200);
-      }
-    }
+function firework() {
+  for (let i = 0; i < 20; i++) {
+    const fw = document.createElement("div");
+    fw.className = "firework";
+    fw.style.left = Math.random()*window.innerWidth+"px";
+    fw.style.top = Math.random()*window.innerHeight+"px";
+    fw.style.background = `hsl(${Math.random()*360},100%,60%)`;
+    document.body.appendChild(fw);
+    setTimeout(()=>fw.remove(),1200);
+  }
+}
 
-    function bigFireworks() {
-      for (let i = 0; i < 6; i++) {
-        setTimeout(createFirework, i * 300);
-      }
-    }
+function bigFireworks() {
+  for (let i = 0; i < 6; i++) setTimeout(firework, i*300);
+}
 
-    const targetDate = new Date('March 28, 2006').getTime();
-    function updateCountdown() {
-      const now = new Date().getTime();
-      const diff = now - targetDate;
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      document.getElementById('countdown').innerText =
-        `🎉 Celebrating ${days} years of awesomeness! 🎉`;
-    }
-    updateCountdown();
-  </script>
+/* 🎯 Correct Age Calculation */
+const birthDate = new Date(2006,2,28);
+const today = new Date();
+let age = today.getFullYear() - birthDate.getFullYear();
+if (
+  today.getMonth() < birthDate.getMonth() ||
+  (today.getMonth() === birthDate.getMonth() && today.getDate() < birthDate.getDate())
+) age--;
+
+document.getElementById("ageText").innerText =
+  `🎉 Celebrating ${age} years of awesomeness! 🎉`;
+</script>
 
 </body>
 </html>
