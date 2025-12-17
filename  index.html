@@ -1,0 +1,188 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday Darshan 🎉</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #89f7fe, #66a6ff);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }.card {
+  background: white;
+  padding: 30px 40px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  animation: pop 1s ease-in-out;
+  max-width: 360px;
+  z-index: 2;
+}
+
+h1 {
+  color: #2563eb;
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+}
+
+p {
+  color: #444;
+  font-size: 1.1rem;
+}
+
+button {
+  margin-top: 20px;
+  padding: 12px 22px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 30px;
+  background: #2563eb;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+}
+
+button:hover {
+  background: #1d4ed8;
+  transform: scale(1.05);
+}
+
+.hidden {
+  display: none;
+}
+
+@keyframes pop {
+  0% { transform: scale(0.5); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.balloons span {
+  position: absolute;
+  bottom: -50px;
+  font-size: 28px;
+  animation: floatUp 6s linear infinite;
+  opacity: 0.9;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0); opacity: 0; }
+  20% { opacity: 1; }
+  100% { transform: translateY(-120vh); opacity: 0; }
+}
+
+.firework {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  animation: explode 1s ease-out forwards;
+}
+
+@keyframes explode {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(4); opacity: 0; }
+}
+  20% { opacity: 1; }
+  100% { transform: translateY(-120vh); opacity: 0; }
+}
+
+  </style>
+</head>
+<body>  <audio id="bgMusic" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+  </audio>  <div class="card">
+    <div id="countdown" style="font-size:1.1rem;color:#2563eb;margin-bottom:10px;font-weight:600;">Loading countdown...</div>
+    <h1>Happy Birthday Darshan 🎂</h1>
+    <p>28 March 2006 🎉</p>
+    <button onclick="showMessage()">Click for Surprise 🎁</button>
+    <button style="margin-left:10px;background:#16a34a" onclick="startGame()">Play Game 🎮</button>
+    <p id="message" class="hidden">
+      Dear Darshan 💙<br/><br/>
+      Wishing you a day filled with happiness, laughter, and unforgettable moments 🌟<br/>
+      May all your dreams come true and may this year bring you success and joy 🎯✨<br/><br/>
+      — From your brother,<br/>
+      <strong>Yash ❤️</strong>
+    </p>
+  </div>  <div class="balloons" id="balloons"></div>
+  <div id="game" class="hidden" style="margin-top:15px;font-size:1rem;">
+    <p><strong>🎯 Birthday Guess Game</strong></p>
+    <p>Guess Darshan's birth month:</p>
+    <input id="guess" placeholder="Type month (e.g. March)" style="padding:6px;border-radius:8px;border:1px solid #ccc" />
+    <button onclick="checkGuess()" style="margin-left:6px">Submit</button>
+    <p id="gameResult"></p>
+  </div>  <script>
+    function showMessage() {
+      document.getElementById('message').classList.remove('hidden');
+      document.getElementById('bgMusic').play();
+      createBalloons();
+      bigFireworks();
+    }
+
+    function startGame() {
+      document.getElementById('game').classList.remove('hidden');
+    }
+
+    function checkGuess() {
+      const val = document.getElementById('guess').value.toLowerCase();
+      const res = document.getElementById('gameResult');
+      if (val.includes('march')) {
+        res.innerHTML = '🎉 Correct! Happy Birthday Darshan! 🎂';
+        bigFireworks();
+      } else {
+        res.innerHTML = '❌ Nope! Try again 😄';
+      }
+    }
+
+    function createBalloons() {
+      const container = document.getElementById('balloons');
+      const emojis = ['🎈','🎉','🎂','⭐','🎁'];
+      for (let i = 0; i < 25; i++) {
+        const balloon = document.createElement('span');
+        balloon.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+        balloon.style.left = Math.random() * 100 + 'vw';
+        balloon.style.animationDuration = (Math.random() * 3 + 4) + 's';
+        container.appendChild(balloon);
+        setTimeout(() => balloon.remove(), 6000);
+      }
+    }
+
+    function createFirework() {
+      for (let i = 0; i < 12; i++) {
+        const fw = document.createElement('div');
+        fw.className = 'firework';
+        fw.style.left = window.innerWidth / 2 + 'px';
+        fw.style.top = window.innerHeight / 2 + 'px';
+        fw.style.background = `hsl(${Math.random() * 360},100%,60%)`;
+        fw.style.transform = `translate(${Math.random()*300-150}px, ${Math.random()*300-150}px)`;
+        document.body.appendChild(fw);
+        setTimeout(() => fw.remove(), 1200);
+      }
+    }
+
+    function bigFireworks() {
+      for (let i = 0; i < 6; i++) {
+        setTimeout(createFirework, i * 300);
+      }
+    },100%,60%)`;
+      document.body.appendChild(fw);
+      setTimeout(() => fw.remove(), 1000);
+    }
+
+    setInterval(createFirework, 700);
+
+    const targetDate = new Date('March 28, 2006 00:00:00').getTime();
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const diff = now - targetDate;
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      document.getElementById('countdown').innerText = `🎉 Celebrating ${days} years of awesomeness! 🎉`;
+    }
+    updateCountdown();
+    }
+  </script></body>
+</html>
